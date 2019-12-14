@@ -4,13 +4,16 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema(
   {
     first_name: {
-      type: String
+      type: String,
+      required: true
     },
     last_name: {
-      type: String
+      type: String,
+      required: true
     },
     nickname: {
-      type: String
+      type: String,
+      required: true
     },
     email: {
       type: String,
@@ -25,9 +28,24 @@ const userSchema = new Schema(
       type: Boolean,
       required: true
     },
-    Score :{
-        type: String
-    }
+    score: {
+      type: String,
+      required: true
+    },
+    provided_items: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Item",
+        required: true
+      }
+    ],
+    requested_items: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Item",
+        required: true
+      }
+    ]
   },
   { timestamps: true }
 );
