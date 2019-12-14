@@ -25,13 +25,15 @@ const itemSchema = new Schema(
       type: String,
       required: true
     },
-    belongs_to_user: [
-      {
+    belongs_to_user:{
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
-      }
-    ],
+      },
+    requested_by_user:[{
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      }],
     item_status: {
       type: String,
       enum: [

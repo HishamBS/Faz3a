@@ -35,17 +35,25 @@ const userSchema = new Schema(
     provided_items: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Item",
-        required: true
+        ref: "Item"
       }
     ],
     requested_items: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Item",
+        ref: "Item"
+      }
+    ],
+    coordinates: {
+      lat: {
+        type: String,
+        required: true
+      },
+      long: {
+        type: String,
         required: true
       }
-    ]
+    }
   },
   { timestamps: true }
 );
