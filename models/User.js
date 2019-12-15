@@ -29,7 +29,7 @@ const userSchema = new Schema(
       required: true
     },
     score: {
-      type: String,
+      type: Number,
       required: true
     },
     provided_items: [

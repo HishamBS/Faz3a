@@ -50,6 +50,26 @@ router.put("/:id", (req, res) => {
   }, 3000);
 });
 
+//increase the score of a selected user
+router.put("/:id/increasescore", (req, res) => {
+  let editedScore = req.body.score;
+  User.findOne({ _id: req.params.id })
+    .then(user => {
+      user.score+=editedScore
+      user.save()
+      .then(user =>{
+        res
+        .status(202)
+        .json({ msg: "Score Added Successfully", currentScore: user.score});
+      })
+
+      
+    })
+    .catch(err => {
+      res.status(400).json({ msg: "something went wrong", err: err });
+    });
+});
+
 router.post("/register", (req, res) => {
   const newUser = { ...req.body };
   User.findOne({ email: newUser.email })
@@ -78,8 +98,7 @@ router.post("/login", (req, res) => {
     .then(user => {
       if (user) {
         if (bcrypt.compareSync(req.body.password, user.password)) {
-          user.password = "";
-          let payload = { user };
+          let payload = { email: user.email, nickname: user.nickname };
           let token = jwt.sign(payload, process.env.SECRET_KEY, {
             expiresIn: "24h"
           });
