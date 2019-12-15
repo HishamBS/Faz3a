@@ -33,6 +33,8 @@ export default class Signup extends Component {
         console.log(this.state)
         return (
             <div>
+                <br />
+                <br />
                 <Container>
                     <Formik
                         initialValues={{

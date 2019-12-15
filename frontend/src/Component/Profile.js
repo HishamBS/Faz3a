@@ -4,7 +4,7 @@ import { Button, Form, Col, Jumbotron } from 'react-bootstrap';
 export default class Profile extends Component {
     render() {
         return (
-            <div>
+            <div >
                 <Jumbotron style={{ backgroundColor: "white" }}>
                     <Form>
                         <Form.Row>
