@@ -55,15 +55,12 @@ router.put("/:id/increasescore", (req, res) => {
   let editedScore = req.body.score;
   User.findOne({ _id: req.params.id })
     .then(user => {
-      user.score+=editedScore
-      user.save()
-      .then(user =>{
+      user.score += editedScore;
+      user.save().then(user => {
         res
-        .status(202)
-        .json({ msg: "Score Added Successfully", currentScore: user.score});
-      })
-
-      
+          .status(202)
+          .json({ msg: "Score Added Successfully", currentScore: user.score });
+      });
     })
     .catch(err => {
       res.status(400).json({ msg: "something went wrong", err: err });
