@@ -31,18 +31,30 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(400).send(err));
 });
 
-//edit user
-router.put("/:id", (req, res) => {
+//edit user info without password
+router.put("/edituser/:id", (req, res) => {
   let edited = req.body;
-  if (edited.password) {
-    bcrypt.hash(edited.password, 10, (err, hash) => {
-      edited.password = hash;
-    });
-  }
   setTimeout(() => {
     User.findByIdAndUpdate(req.params.id, edited)
       .then(response => {
         res.status(202).json({ msg: "edited successfully", user: response });
+      })
+      .catch(err => {
+        res.status(400).json({ msg: "something went wrong", err: err });
+      });
+  }, 3000);
+});
+
+//edit password only
+router.put("/editpassword/:id", (req, res) => {
+  let editedPass = req.body;
+  bcrypt.hash(editedPass, 10, (err, hash) => {
+    editedPass = hash;
+  });
+  setTimeout(() => {
+    User.findByIdAndUpdate(req.params.id, editedPass)
+      .then(response => {
+        res.status(202).json({ msg: "password edited successfully" });
       })
       .catch(err => {
         res.status(400).json({ msg: "something went wrong", err: err });

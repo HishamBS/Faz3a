@@ -14,6 +14,13 @@ export default class Login extends Component {
         message: "",
         isAuthenticated: false
     };
+    componentDidMount()
+    {
+        if(this.state.isAuthenticated)
+        {
+            this.props.history.push("/");
+        }
+    }
 
     addDataToState(data) {
         this.setState({ data: data, message: "Your successfully login" });
