@@ -26,11 +26,11 @@ const userSchema = new Schema(
     },
     isAdmin: {
       type: Boolean,
-      required: true
+      default: false
     },
     score: {
       type: Number,
-      required: true
+      default: 0
     },
     provided_items: [
       {
@@ -47,11 +47,11 @@ const userSchema = new Schema(
     coordinates: {
       lat: {
         type: String,
-        required: true
+        default: "21.436099841056247"
       },
       long: {
         type: String,
-        required: true
+        default: "39.84654660000001"
       }
     }
   },

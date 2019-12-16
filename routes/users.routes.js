@@ -88,14 +88,17 @@ router.post("/register", (req, res) => {
     })
     .catch(err => res.status(400).send(err));
 });
-
 //login
 router.post("/login", (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
       if (user) {
         if (bcrypt.compareSync(req.body.password, user.password)) {
-          let payload = { email: user.email, nickname: user.nickname };
+          let payload = {
+            id: user._id,
+            email: user.email,
+            nickname: user.nickname
+          };
           let token = jwt.sign(payload, process.env.SECRET_KEY, {
             expiresIn: "24h"
           });
