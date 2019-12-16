@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.19.2/libexec/bin/yarn.js add react-google-maps
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.19.2/libexec/bin/yarn.js add all
 
 PATH: 
   /Users/shahad/.rbenv/shims:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin:/Users/shahad/.rbenv/shims:/Users/shahad/anaconda3/bin:/Users/shahad/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.7/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/Users/shahad/Desktop/SEI/projects/Faz3a/node_modules/react-google-map/CHANGELOG.md'
+  Error: EACCES: permission denied, mkdir '/Users/shahad/Desktop/SEI/projects/Faz3a/node_modules/follow-redirects/node_modules/ms'
 
 npm manifest: 
   {
@@ -42,7 +42,7 @@ npm manifest:
       "admin-bro-mongoose": "^0.3.0",
       "admin-bro-theme-dark": "^1.0.0",
       "argon2": "^0.25.1",
-      "bcrypt": "^3.0.7",
+      "bcrypt": "*",
       "cors": "^2.8.5",
       "dotenv": "^8.2.0",
       "express": "^4.17.1",

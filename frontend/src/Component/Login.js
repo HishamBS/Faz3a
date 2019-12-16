@@ -5,6 +5,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Container, Navbar, FormControl, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { login } from "../Component/functionAuth";
+import NavBarComp from './main/NavBarComp'
 import swal from "sweetalert";
 
 export default class Login extends Component {
@@ -14,15 +15,17 @@ export default class Login extends Component {
         message: "",
         isAuthenticated: false
     };
+    componentDidMount()
+    {
+        if(this.state.isAuthenticated)
+        {
+            this.props.history.push("/");
+        }
+    }
 
     addDataToState(data) {
         this.setState({ data: data, message: "Your successfully login" });
         console.log(this.state.message);
-        swal({
-            title: "Your successfully login",
-            icon: "success",
-            button: "ok"
-          })
         login(this.state.data)
             .then(res => {
                 if (res) this.setState({ isAuthenticated: true });
@@ -34,6 +37,7 @@ export default class Login extends Component {
     render() {
         return (
             <div>
+                <NavBarComp />
                 <br />
                 <br />
 
@@ -54,8 +58,8 @@ export default class Login extends Component {
                         onSubmit={fields => {
                             console.log(fields);
                             this.addDataToState(fields);
-                            if (this.state.isAuthenticated) this.props.history.push("/");
-                            else this.props.history.push("/login");
+                            console.log(this.state.isAuthenticated);
+                          !this.state.isAuthenticated? this.props.history.push("/"): this.props.history.push("/login")
                         }}
                         render={({ errors, status, touched }) => (
                             <Form>
