@@ -13,17 +13,17 @@ export default class NavBarComp extends Component {
                 <Header class="nav" >
                 <div class="nav">
                     <input type="checkbox" id="nav-check" />
-                    <div class="nav-header">
+                    <div className="nav-header">
                         <div class="nav-title"></div>
                     </div>
-                    <div class="nav-btn">
+                    <div className="nav-btn">
                         <label for="nav-check">
                             <span></span>
                             <span></span>
                             <span></span>
                         </label>
                     </div>
-                    <div class="nav-links">
+                    <div className="nav-links">
                         <Link as={Link} to='/'>Home</Link>
                         <Link as={Link} to='/services'>Services</Link>
                         <Link as={Link} to='/points'>Points</Link>
