@@ -13,9 +13,8 @@ import Map from './Component/Map'
 export class App extends Component {
   render() {
     return (
-      <div>
+      <div className='App'>
         <BrowserRouter>
-          <NavBarComp />
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/points' component={Home} />

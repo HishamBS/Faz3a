@@ -12,6 +12,8 @@ body {
   width: 100%;
   position: relative;
   font-family: 'Architects Daughter', cursive;
+  display: flex;
+  justify-content: center;
 }
 
 .nav > .nav-header {
