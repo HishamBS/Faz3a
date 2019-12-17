@@ -24,7 +24,7 @@ export default class Login extends Component {
         {
             swal({
                 title: "Your successfully logged in",
-                text:"Welcome On Board",
+                text:"Welcome Back",
                 icon: "success",
                 button: "ok"
               });
