@@ -17,9 +17,11 @@ export default class Login extends Component {
   };
 
   addDataToState(data) {
-    this.setState({ data: data});
+    this.setState({ data: data});    
     login(this.state.data)
       .then(res => {
+        console.log(res);
+        
         if (res)
         {
             swal({
@@ -68,7 +70,6 @@ export default class Login extends Component {
                 .required("Password is required")
             })}
             onSubmit={fields => {
-              console.log(fields);
               this.addDataToState(fields);
             }}
             render={({ errors, status, touched }) => (

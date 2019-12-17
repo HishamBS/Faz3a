@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import GoogleMapReact from "google-map-react";
 import NavBarComp from "./main/NavBarComp";
-import Marker from "./Marker";
+import Marker_Services from "./Marker_Services";
 import Chat from "./Chat";
 import dotenv from 'dotenv/config'
 import { checkAuth, userdata } from "../Component/functionAuth";
 import { Layout, Icon, Drawer, Button } from "antd";
-import axios from "axios";
+import Axios from "axios";
 const { Content } = Layout;
 
 export default class Map extends Component {
@@ -20,21 +20,23 @@ export default class Map extends Component {
                 }
             }
         ],
-        user: ''
+        user: []
     };
     componentDidMount() {
-        axios({
-            method: 'get',
-            url: `/api/v1/users/${localStorage.userId}`
+        Axios.get("/api/v1/users")
+            .then(user => {
+                var usersCord = user.data.map((single_user) => {
+                    return single_user 
+                })
+                this.setState({
+                    user: usersCord
+                  })
+                console.log(this.state.user);
             })
-        .then(res => {
-            console.log(res);
-            this.setState({ user: res.data })
-        })
-        .catch(err => console.log(err));
-      }
+            .catch(err => console.log(err));
+    }
 
-    getMapOptions = maps => {
+    getMapOptions = () => {
         return {
             disableDefaultUI: true,
             mapTypeControl: true,
@@ -48,20 +50,22 @@ export default class Map extends Component {
             ]
         };
     };
-    // userdata = () => {
-    //     axios.get(`/api/v1/users/login/${localStorage.userId}`)
-    //         .then(res => {
-    //             console.log(res);
-    //             this.setState({ user: res })
-    //         })
-    //         .catch(err => console.log(err));
-    // };
 
 
     render() {
         checkAuth(this.props);
-        // console.log(userdata());
-        
+        var users_markers = this.state.user.map((single_user) => {
+            console.log(single_user.nickname);
+            console.log(single_user.coordinates.lat);
+            console.log(single_user.coordinates.long);
+
+            
+            return  <Marker_Services
+                lat={single_user.coordinates.lat}
+                lng={single_user.coordinates.long}
+                name={single_user.nickname}
+            /> 
+        })
         return (
             <div>
                 <hr />
@@ -75,34 +79,14 @@ export default class Map extends Component {
                                 key: process.env.REACT_APP_MAP_KEY
                             }}
                             defaultCenter={{ lat: 21.508411, lng: 39.173046 }}
-                            defaultZoom={18}
+                            defaultZoom={15}
                             options={this.getMapOptions}
                         >
-                            {/* <Marker
-                                lat={user.coordinates.lat}
-                                lng={user.coordinates.long}
-                                name={user.nickname}
-                            /> */}
-                            <Marker
-                                lat={21.5621632}
-                                lng={39.2060928}
-                                title="Hisham"
-                                name="Hisham "
-                                color="Blue"
-                                onClick={this.props.onMarkerClick}
-                            />
-                            {this.state.markers.map((marker, index) => (
-                                <Marker
-                                    position={marker.position}
-                                    draggable={true}
-                                    onDragend={(t, map, coord) => this.onMarkerDragEnd(coord, index)}
-                                    name={marker.name}
-                                />
-                            ))}
+                            {users_markers}
+            
                         </GoogleMapReact>
                     </div>
                     <div>
-                        <Chat />
                     </div>
                 </Content>
             </div>

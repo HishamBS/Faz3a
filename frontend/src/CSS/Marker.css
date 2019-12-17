@@ -2,7 +2,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50% 50% 50% 0;
-    background: #00cae9;
+    background: red;
     position: absolute;
     transform: rotate(-45deg);
     left: 50%;

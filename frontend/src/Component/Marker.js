@@ -1,26 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react'
 import '../CSS/Marker.css';
 import { Popover, Button } from 'antd'
 
 
-const Mark = (props) => {
-    const { color, name, id } = props;
-    return (
-        <div>
-            <p>Name</p>
-
+export default class Marker extends Component {
+    render() {
+        const { color, name} = this.props;
+        return (
             <div>
-                {/* <Popover title="Shahad" trigger="hover"> */}
+                 <Popover title={name} trigger="hover">
                     <div
                         className="pin bounce"
                         style={{ backgroundColor: color, cursor: 'pointer' }}
                         title={name}
                     />
                     <div className="pulse" />
-                {/* </Popover> */}
+                </Popover>
             </div>
-        </div>
-    );
-};
-
-export default Mark;
+        )
+    }
+}

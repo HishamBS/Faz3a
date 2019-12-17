@@ -58,14 +58,14 @@ export default class MapContainer extends Component {
                             defaultZoom={12}
                             options={this.getMapOptions}
                         >
-                            <Marker
+                            {/* <Marker
                                 lat={this.state.latitude}
                                 lng={this.state.longitude}
                                 name="Shahad "
                                 color="Red"
 
                                 onClick={this.props.onMarkerClick}
-                            />
+                            /> */}
                         </GoogleMapReact>
 
                         <br />
