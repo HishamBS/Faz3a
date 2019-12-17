@@ -45,7 +45,7 @@ export default class Marker_Services extends Component {
     };
 
     isChecked = (value) => {
-        console.log(value);
+    console.log(value);
        this.setState({
         item_cheacked:[...this.state.item_cheacked, value]
       });
