@@ -9,17 +9,14 @@ import dotenv from "dotenv/config";
 const { Content } = Layout;
 
 export default class MapContainer extends Component {
-  state = {
-    latitude: 0,
-    longitude: 0,
-  };
+  state = {};
 
   componentWillMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
           latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+          longitude: position.coords.longitude
         });
         console.log(position);
       },
@@ -49,11 +46,11 @@ export default class MapContainer extends Component {
       latitude: e.lat,
       longitude: e.lng
     });
-    this.props.loc(this.state.latitude,this.state.longitude)
+    this.props.loc(this.state.latitude, this.state.longitude);
   };
   render() {
     //   console.log(this.state);
-      
+
     return (
       <div>
         <Content style={{ padding: "0 100px" }}>
