@@ -5,6 +5,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Container, Navbar, FormControl, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { login } from "../Component/functionAuth";
+import NavBarComp from './main/NavBarComp'
 import swal from "sweetalert";
 
 export default class Login extends Component {

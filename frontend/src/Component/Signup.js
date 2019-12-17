@@ -6,24 +6,39 @@ import { Container, Navbar, FormControl, Nav } from "react-bootstrap";
 import axios from "axios";
 import swal from "sweetalert";
 import { register } from "../Component/functionAuth";
-
+import NavBarComp from './main/NavBarComp'
+import MapContainer from "./MapContainer";
 export default class Signup extends Component {
   state = {
     data: {},
     message: ""
   };
+  componentDidMount() {
 
+    navigator.geolocation.getCurrentPosition(position => {
+        this.setState({
+            latitude : position.coords.latitude ,
+            longitude : position.coords.longitude,
+            data : this.props.data
+        })
+        register(this.state.data, this.state.latitude, this.state.longitude);
+        
+    }, error => {
+        console.error(error)
+    })
+}
   addDataToState(data) {
-    this.setState({ data: data, message: "Your message has been Sent" });
+    let temp = {...this.s}
+    this.setState({ data: data, message: "Your message has been Sent"});
   }
   
   render() {
     console.log(this.state);
     return (
       <div>
+        <NavBarComp />
         <br />
         <br />
-        <Container>
           <Formik
             initialValues={{
               first_name: "",
@@ -55,7 +70,6 @@ export default class Signup extends Component {
               });
               this.addDataToState(fields);
               console.log(this.state.data);
-              register(this.state.data);
               this.props.history.push("/login");
             }}
             render={({ errors, status, touched }) => (
@@ -163,6 +177,7 @@ export default class Signup extends Component {
                     className="invalid-feedback"
                   />
                 </div>
+                <MapContainer />
                 <div className="form-group">
                   <button type="submit" className="btn btn-primary mr-2">
                     Register
@@ -174,7 +189,6 @@ export default class Signup extends Component {
               </Form>
             )}
           />
-        </Container>
         <h4> {this.state.message}</h4>
       </div>
     );

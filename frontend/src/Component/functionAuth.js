@@ -3,10 +3,11 @@ import decode from "jwt-decode";
 
 export const register = newUser => {
   return axios
-    .post("/api/v1/users/register", newUser)
+    .post("/api/v1/users/register", newUser, latitude, longitude)
     .then(res => console.log(res))
     .catch(err => console.log(err));
 };
+
 export const login = user => {
   return axios
     .post("/api/v1/users/login", user)

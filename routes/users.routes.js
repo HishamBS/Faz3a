@@ -19,6 +19,7 @@ router.get("/", (req, res) => {
     .catch(err => res.status(400).send(err));
 });
 
+
 //get specific user
 router.get("/:id", (req, res) => {
   User.findById(req.params.id)
@@ -30,6 +31,7 @@ router.get("/:id", (req, res) => {
     })
     .catch(err => res.status(400).send(err));
 });
+
 
 //edit user info without password
 router.put("/edituser/:id", (req, res) => {
@@ -80,7 +82,7 @@ router.put("/:id/increasescore", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-  const newUser = { ...req.body };
+  const newUser = { ...req.body };  
   User.findOne({ email: newUser.email })
     .then(user => {
       if (!user) {
@@ -102,9 +104,14 @@ router.post("/register", (req, res) => {
 });
 //login
 router.post("/login", (req, res) => {
+  console.log(req.body);
   User.findOne({ email: req.body.email })
     .then(user => {
-      if (user) {
+      console.log(user);
+      
+      if (user) {        
+        console.log(bcrypt.compareSync(req.body.password, user.password));
+        
         if (bcrypt.compareSync(req.body.password, user.password)) {
           let payload = {
             id: user._id,
@@ -114,7 +121,7 @@ router.post("/login", (req, res) => {
           let token = jwt.sign(payload, process.env.SECRET_KEY, {
             expiresIn: "24h"
           });
-          res.status(200).json({ msg: "logged in successfully", token: token });
+          res.status(200).json({ msg: "logged in successfully", token: token});
         } else {
           res.status(400).send("password is not correct");
         }
