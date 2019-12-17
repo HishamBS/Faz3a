@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../CSS/Marker.css';
 import Chat from './Chat'
 import Items from './Items'
-import { Popover, Avatar, Modal, Button } from 'antd'
+import { Popover, Avatar, Modal, Button} from 'antd'
 import Axios from "axios";
 
 export default class Marker_Services extends Component {
@@ -10,7 +10,8 @@ export default class Marker_Services extends Component {
         loading: false,
         visible: false,
         user: {},
-        item: []
+        item: [], 
+        item_cheacked: []
     };
     showModal = () => {
         Axios.get("/api/v1/users")
@@ -43,14 +44,20 @@ export default class Marker_Services extends Component {
         this.setState({ visible: false });
     };
 
-  
-
+    isChecked = (value) => {
+        console.log(value);
+       this.setState({
+        item_cheacked:[...this.state.item_cheacked, value]
+      });
+      console.log(this.state.item_cheacked);
+      
+    }
     render() {
         const { color, name } = this.props;
-        const { visible, loading, flag } = this.state;
+        const { visible } = this.state;
+
         var allitem = this.state.item.map( single => {
-            console.log(single);
-            return <Items items={single}/>
+            return <Items items={single} isChecked={this.isChecked}/>
         })
         return (
             <div>
@@ -77,7 +84,7 @@ export default class Marker_Services extends Component {
                     onCancel={this.handleCancel}
                     footer={[
                         <Button key="back" onClick={this.handleCancel}>Return</Button>,
-                        <Chat />]}>
+                        <Chat id={this.state.user._id} />]}>
                     <p>{allitem}</p>
                 </Modal>
             </div>

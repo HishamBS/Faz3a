@@ -31,7 +31,6 @@ export default class Map extends Component {
                 this.setState({
                     user: usersCord
                 })
-                console.log(this.state.user);
             })
             .catch(err => console.log(err));
     }
@@ -53,13 +52,7 @@ export default class Map extends Component {
 
     render() {
         checkAuth(this.props);
-        // console.log(userdata());
         var users_markers = this.state.user.map((single_user) => {
-            console.log(single_user.nickname);
-            console.log(single_user.coordinates.lat);
-            console.log(single_user.coordinates.long);
-
-
             return <Marker_Services
                 lat={single_user.coordinates.lat}
                 lng={single_user.coordinates.long}
