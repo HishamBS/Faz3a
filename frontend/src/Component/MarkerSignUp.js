@@ -3,20 +3,23 @@ import '../CSS/Marker.css';
 import { Popover, Button } from 'antd'
 
 
-export default class Marker extends Component {
-    render() {
-        const { color, name} = this.props;
-        return (
+const MarkerSignUp = (props) => {
+    const { color, name, id } = props;
+    return (
+        <div>
+
             <div>
-                 <Popover title={name} trigger="hover">
+                <Popover title="Your Current Location , click anywhere to change it" trigger="hover">
                     <div
                         className="pin bounce"
                         style={{ backgroundColor: color, cursor: 'pointer' }}
-                        title={name}
+                        title={props.name}
                     />
                     <div className="pulse" />
                 </Popover>
             </div>
-        )
-    }
-}
+        </div>
+    );
+};
+
+export default MarkerSignUp;

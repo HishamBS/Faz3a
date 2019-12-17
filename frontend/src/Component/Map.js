@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import NavBarComp from "./main/NavBarComp";
 import Marker_Services from "./Marker_Services";
 import Chat from "./Chat";
-import dotenv from 'dotenv/config'
+import dotenv from "dotenv/config";
 import { checkAuth, userdata } from "../Component/functionAuth";
 import { Layout, Icon, Drawer, Button } from "antd";
 import Axios from "axios";
@@ -26,11 +26,11 @@ export default class Map extends Component {
         Axios.get("/api/v1/users")
             .then(user => {
                 var usersCord = user.data.map((single_user) => {
-                    return single_user 
+                    return single_user
                 })
                 this.setState({
                     user: usersCord
-                  })
+                })
                 console.log(this.state.user);
             })
             .catch(err => console.log(err));
@@ -51,20 +51,20 @@ export default class Map extends Component {
         };
     };
 
-
     render() {
         checkAuth(this.props);
+        // console.log(userdata());
         var users_markers = this.state.user.map((single_user) => {
             console.log(single_user.nickname);
             console.log(single_user.coordinates.lat);
             console.log(single_user.coordinates.long);
 
-            
-            return  <Marker_Services
+
+            return <Marker_Services
                 lat={single_user.coordinates.lat}
                 lng={single_user.coordinates.long}
                 name={single_user.nickname}
-            /> 
+            />
         })
         return (
             <div>
@@ -83,7 +83,7 @@ export default class Map extends Component {
                             options={this.getMapOptions}
                         >
                             {users_markers}
-            
+
                         </GoogleMapReact>
                     </div>
                     <div>
