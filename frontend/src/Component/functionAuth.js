@@ -1,7 +1,6 @@
 import axios from "axios";
 import decode from "jwt-decode";
 
-
 export const register = newUser => {
   return axios
     .post("/api/v1/users/register", newUser)
@@ -11,28 +10,40 @@ export const register = newUser => {
 export const login = user => {
   return axios
     .post("/api/v1/users/login", user)
-    .then(res => {
-      console.log(res.data.token);
+    .then(async(res) => {
       localStorage.setItem("usertoken", res.data.token);
-      return res.data.token;
+      const decodedToken = await decode(res.data.token)
+        localStorage.setItem("user_id", decodedToken.id);
+        return res.data.token
     })
     .catch(err => console.log(err));
 };
 
-export const checkAuth = async (props) => {
+export const checkAuth = async props => {
   var dateNow = new Date();
   if (!localStorage.usertoken) {
     props.history.push("/login");
-    
+    console.log("offline");
   } else {
     const token = localStorage.getItem("usertoken");
     var decodedToken = await decode(token);
-    var exp = decodedToken.exp
-    console.log(new Date(Number(exp+"000")) );
-    console.log(dateNow.getTime())
-    if (exp < (dateNow.getTime()/1000)) {
+    var exp = decodedToken.exp;
+    if (exp < dateNow.getTime() / 1000) {
+      console.log("hello");
+
       props.history.push("/login");
     }
   }
 };
 
+export const getUserData = async () => {
+  const uid = localStorage.getItem("user_id");
+  if (uid) {
+    axios
+      .get(`/api/v1/users/${uid}`)
+      .then(user => {
+       return user.data
+      })
+      .catch(err => console.log(err));
+  }
+};

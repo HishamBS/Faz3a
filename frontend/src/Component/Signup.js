@@ -16,6 +16,7 @@ export default class Signup extends Component {
   addDataToState(data) {
     this.setState({ data: data, message: "Your message has been Sent" });
   }
+  
   render() {
     console.log(this.state);
     return (
