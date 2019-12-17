@@ -25,22 +25,26 @@ const itemSchema = new Schema(
       type: String,
       required: true
     },
-    belongs_to_user:{
+    belongs_to_user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    },
+    requested_by_user: [
+      {
         type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-      },
-    requested_by_user:[{
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      }],
+        ref: "User"
+      }
+    ],
     item_status: {
       type: String,
-      enum: [
-        "available",
-        "unavailable"
-      ],
+      enum: ["available", "unavailable"],
       required: true
+    },
+    item_type: {
+      type: String,
+      enum: ["giveaway", "lend"],
+      defualt: "lend"
     }
   },
   { timestamps: true }

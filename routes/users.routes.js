@@ -121,7 +121,7 @@ router.post("/login", (req, res) => {
           let token = jwt.sign(payload, process.env.SECRET_KEY, {
             expiresIn: "24h"
           });
-          res.status(200).json({ msg: "logged in successfully", token: token , id: user.id});
+          res.status(200).json({ msg: "logged in successfully", token: token});
         } else {
           res.status(400).send("password is not correct");
         }
