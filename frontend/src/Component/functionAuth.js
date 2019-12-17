@@ -42,7 +42,8 @@ export const getUserData = async () => {
     axios
       .get(`/api/v1/users/${uid}`)
       .then(user => {
-        return user.data;
+        console.log(user.data);
+       return user.data
       })
       .catch(err => console.log(err));
   }

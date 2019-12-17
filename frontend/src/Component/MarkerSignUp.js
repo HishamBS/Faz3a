@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react'
 import '../CSS/Marker.css';
 import { Popover, Button } from 'antd'
 

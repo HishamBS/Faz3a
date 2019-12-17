@@ -31,7 +31,8 @@ export default class Chat extends Component {
         return (
             <div>
                 <Button type="primary" onClick={this.showDrawer} >
-                <Icon style={{ width: '100%' , height: '100%' }} type="wechat" />
+                <Icon type="wechat" />
+                Contact Provider
               </Button>
                 <Drawer
                     title="Chat"

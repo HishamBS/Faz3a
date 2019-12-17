@@ -1,94 +1,95 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import NavBarComp from "./main/NavBarComp";
-import Marker from "./MarkerSignUp";
+import Marker_Services from "./Marker_Services";
 import Chat from "./Chat";
 import dotenv from "dotenv/config";
 import { checkAuth, userdata } from "../Component/functionAuth";
 import { Layout, Icon, Drawer, Button } from "antd";
-import axios from "axios";
+import Axios from "axios";
 const { Content } = Layout;
 
 export default class Map extends Component {
-  state = {
-    markers: [
-      {
-        name: "Current position",
-        position: {
-          lat: 37.77,
-          lng: -122.42
-        }
-      }
-    ],
-    user: ""
-  };
-  componentDidMount() {}
-
-  getMapOptions = maps => {
-    return {
-      disableDefaultUI: true,
-      mapTypeControl: true,
-      streetViewControl: true,
-      styles: [
-        {
-          featureType: "poi",
-          elementType: "labels",
-          stylers: [{ visibility: "on" }]
-        }
-      ]
+    state = {
+        markers: [
+            {
+                name: "Current position",
+                position: {
+                    lat: 37.77,
+                    lng: -122.42
+                }
+            }
+        ],
+        user: []
     };
-  };
+    componentDidMount() {
+        Axios.get("/api/v1/users")
+            .then(user => {
+                var usersCord = user.data.map((single_user) => {
+                    return single_user
+                })
+                this.setState({
+                    user: usersCord
+                })
+                console.log(this.state.user);
+            })
+            .catch(err => console.log(err));
+    }
 
-  render() {
-    checkAuth(this.props);
-    // console.log(userdata());
+    getMapOptions = () => {
+        return {
+            disableDefaultUI: true,
+            mapTypeControl: true,
+            streetViewControl: true,
+            styles: [
+                {
+                    featureType: "poi",
+                    elementType: "labels",
+                    stylers: [{ visibility: "on" }]
+                }
+            ]
+        };
+    };
 
-    return (
-      <div>
-        <hr />
-        <NavBarComp />
-        <hr />
-        <Content style={{ padding: "0 100px" }}>
-          <br />
-          <div style={{ height: "100vh", width: "100%" }}>
-            <GoogleMapReact
-              bootstrapURLKeys={{
-                key: process.env.REACT_APP_MAP_KEY
-              }}
-              defaultCenter={{ lat: 21.508411, lng: 39.173046 }}
-              defaultZoom={18}
-              options={this.getMapOptions}
-            >
-              {/* <Marker
-                                lat={user.coordinates.lat}
-                                lng={user.coordinates.long}
-                                name={user.nickname}
-                            /> */}
-              <Marker
-                lat={21.56795121366994}
-                lng={39.11139584220223}
-                title="Hisham"
-                name="Hisham "
-                color="Blue"
-                onClick={this.props.onMarkerClick}
-              />
-              {/* {this.state.markers.map((marker, index) => (
-                <Marker
-                  position={marker.position}
-                  draggable={true}
-                  onDragend={(t, map, coord) =>
-                    this.onMarkerDragEnd(coord, index)
-                  }
-                  name={marker.name}
-                /> */}
-              ))}
-            </GoogleMapReact>
-          </div>
-          <div>
-            <Chat />
-          </div>
-        </Content>
-      </div>
-    );
-  }
+    render() {
+        checkAuth(this.props);
+        // console.log(userdata());
+        var users_markers = this.state.user.map((single_user) => {
+            console.log(single_user.nickname);
+            console.log(single_user.coordinates.lat);
+            console.log(single_user.coordinates.long);
+
+
+            return <Marker_Services
+                lat={single_user.coordinates.lat}
+                lng={single_user.coordinates.long}
+                name={single_user.nickname}
+            />
+        })
+        return (
+            <div>
+                <hr />
+                <NavBarComp />
+                <hr />
+                <Content style={{ padding: "0 100px" }}>
+                    <br />
+                    <div style={{ height: "100vh", width: "100%" }}>
+                        <GoogleMapReact
+                            bootstrapURLKeys={{
+                                key: process.env.REACT_APP_MAP_KEY
+                            }}
+                            defaultCenter={{ lat: 21.508411, lng: 39.173046 }}
+                            defaultZoom={15}
+                            options={this.getMapOptions}
+                        >
+                            {users_markers}
+
+                        </GoogleMapReact>
+                    </div>
+                    <div>
+                    </div>
+                </Content>
+            </div>
+        )
+    }
 }
