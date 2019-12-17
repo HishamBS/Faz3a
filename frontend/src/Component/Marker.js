@@ -10,14 +10,14 @@ const Mark = (props) => {
             <p>Name</p>
 
             <div>
-                <Popover title="Shahad" trigger="hover">
+                {/* <Popover title="Shahad" trigger="hover"> */}
                     <div
                         className="pin bounce"
                         style={{ backgroundColor: color, cursor: 'pointer' }}
                         title={name}
                     />
                     <div className="pulse" />
-                </Popover>
+                {/* </Popover> */}
             </div>
         </div>
     );

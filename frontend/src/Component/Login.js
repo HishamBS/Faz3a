@@ -15,10 +15,8 @@ export default class Login extends Component {
         message: "",
         isAuthenticated: false
     };
-    componentDidMount()
-    {
-        if(this.state.isAuthenticated)
-        {
+    componentDidMount() {
+        if (this.state.isAuthenticated) {
             this.props.history.push("/");
         }
     }
@@ -59,7 +57,10 @@ export default class Login extends Component {
                             console.log(fields);
                             this.addDataToState(fields);
                             console.log(this.state.isAuthenticated);
-                          !this.state.isAuthenticated? this.props.history.push("/"): this.props.history.push("/login")
+                            if (this.state.isAuthenticated) {
+                                window.location.href = '/';
+                                this.props.history.push("/")
+                            }
                         }}
                         render={({ errors, status, touched }) => (
                             <Form>

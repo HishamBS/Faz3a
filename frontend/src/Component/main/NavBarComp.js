@@ -7,6 +7,7 @@ import { Icon, Layout, Menu, Dropdown, message, Button } from 'antd';
 const { Header, Content, Footer } = Layout;
 
 export default class NavBarComp extends Component {
+
     handleButtonClick = (e) => {
         message.info('Click on left button.');
         console.log('click left button', e);
@@ -17,8 +18,8 @@ export default class NavBarComp extends Component {
     //     console.log('click', e);
     // }
     handleClick = (e) => {
-        localStorage.usertoken=undefined; 
-        window.location.reload();
+        localStorage.removeItem('usertoken')
+        window.location.href = '/';
         }
     render() {
         return (
@@ -76,6 +77,7 @@ export default class NavBarComp extends Component {
                                     <Menu onClick={this.handleMenuClick}>
                                         <Menu.Item key="1"><Icon type="user" />Profile</Menu.Item>
                                         <Menu.Item key="2"><Icon type="user" />Add Items</Menu.Item>
+                                        <Menu.Item key="2"><Icon type="user" />Chat</Menu.Item>
                                         <Button onClick={this.handleClick} key="3"><Icon type="user" />LogOut</Button>
                                     </Menu>} icon={<Icon type="user" />}>User</Dropdown.Button>
                             </div>

@@ -4,6 +4,8 @@ import NavBarComp from "./main/NavBarComp";
 import Marker from "./Marker";
 import { checkAuth } from "../Component/functionAuth";
 import { Layout, Icon, Drawer, Button } from "antd";
+import dotenv from 'dotenv/config'
+
 const { Content } = Layout;
 
 export default class MapContainer extends Component {
@@ -50,7 +52,7 @@ export default class MapContainer extends Component {
                     <div style={{ height: "50vh", width: "100%" }}>
                         <GoogleMapReact
                             bootstrapURLKeys={{
-                                key: "AIzaSyCfa0ZQC2Y4BKyvZyogVLkBmL3HW3Si5tk"
+                                key: process.env.REACT_APP_MAP_KEY
                             }}
                             defaultCenter={{ lat: 21.508411, lng: 39.173046 }}
                             defaultZoom={12}
