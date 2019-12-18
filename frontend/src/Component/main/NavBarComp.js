@@ -50,6 +50,7 @@ export default class NavBarComp extends Component {
                 <Nav>
                   <NavDropdown title=" User Account " style={{color: "black", "font-size": "20px"}} id="collasible-nav-dropdown">
                     <NavDropdown.Item as={Link} to="/profile" >Profile</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/messages">My Messages</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item as={Button} onClick={this.handleClick}>LogOut</NavDropdown.Item>
                   </NavDropdown>

@@ -19,7 +19,6 @@ router.get("/", (req, res) => {
     .catch(err => res.status(400).send(err));
 });
 
-
 //get specific user
 router.get("/:id", (req, res) => {
   User.findById(req.params.id)
@@ -31,7 +30,6 @@ router.get("/:id", (req, res) => {
     })
     .catch(err => res.status(400).send(err));
 });
-
 
 //edit user info without password
 router.put("/edituser/:id", (req, res) => {
@@ -48,20 +46,19 @@ router.put("/edituser/:id", (req, res) => {
 });
 
 //edit password only
-router.put("/editpassword/:id", (req, res) => {
-  let editedPass = req.body;
-  bcrypt.hash(editedPass, 10, (err, hash) => {
-    editedPass = hash;
-  });
-  setTimeout(() => {
-    User.findByIdAndUpdate(req.params.id, editedPass)
-      .then(response => {
+router.put("/editpassword/:id", async (req, res) => {
+  let editedPass = req.body.password;
+  let cryptedPass = await bcrypt.hash(editedPass, 10, async (err, hash) => {
+    let updatedUser = await User.findByIdAndUpdate(req.params.id, {
+      password: hash
+    })
+      .then(updated => {
         res.status(202).json({ msg: "password edited successfully" });
       })
       .catch(err => {
         res.status(400).json({ msg: "something went wrong", err: err });
       });
-  }, 3000);
+  });
 });
 
 //increase the score of a selected user
@@ -82,7 +79,7 @@ router.put("/:id/increasescore", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-  const newUser = { ...req.body };  
+  const newUser = { ...req.body };
   User.findOne({ email: newUser.email })
     .then(user => {
       if (!user) {
@@ -108,10 +105,10 @@ router.post("/login", (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
       console.log(user);
-      
-      if (user) {        
+
+      if (user) {
         console.log(bcrypt.compareSync(req.body.password, user.password));
-        
+
         if (bcrypt.compareSync(req.body.password, user.password)) {
           let payload = {
             id: user._id,
@@ -121,7 +118,7 @@ router.post("/login", (req, res) => {
           let token = jwt.sign(payload, process.env.SECRET_KEY, {
             expiresIn: "24h"
           });
-          res.status(200).json({ msg: "logged in successfully", token: token});
+          res.status(200).json({ msg: "logged in successfully", token: token });
         } else {
           res.status(400).send("password is not correct");
         }
