@@ -53,7 +53,14 @@ const userSchema = new Schema(
         type: String,
         default: "39.84654660000001"
       }
-    }
+    },
+    chats: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Group",
+        required: true
+      }
+    ]
   },
   { timestamps: true }
 );

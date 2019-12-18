@@ -13,7 +13,7 @@ export default class Signup extends Component {
     latitude: "",
     longitude: ""
   };
-  componentDidMount() {
+  componentWillMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
