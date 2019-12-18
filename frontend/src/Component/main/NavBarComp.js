@@ -100,9 +100,15 @@ export default class NavBarComp extends Component {
                 <Dropdown.Button
                   overlay={
                     <Menu onClick={this.handleMenuClick}>
-                      <Menu.Item key="1">
+                      {/* <Menu.Item key="1" as={Link} to='/profile'>
                         <Icon type="user" />
                         Profile
+                      </Menu.Item> */}
+                      <Menu.Item key="2">
+                      <Link to='/profile'>
+                        <Icon type="user" />
+                        Profile
+                      </Link>
                       </Menu.Item>
                       <Menu.Item key="2">
                         <Icon type="user" />

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { withRouter } from "react-router-dom";
-import { Container, Navbar, FormControl, Nav } from "react-bootstrap";
 import axios from "axios";
 import swal from "sweetalert";
 import { register } from "../Component/functionAuth";

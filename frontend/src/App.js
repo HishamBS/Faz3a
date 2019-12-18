@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 //component
 import NavBarComp from './Component/main/NavBarComp'
 import Home from './Component/Home'
 import Login from './Component/Login'
 import Signup from './Component/Signup'
-import Profile from './Component/Profile'
+import Profile from './Component/Profile/Profile'
 import Map from './Component/Map'
 
 export class App extends Component {

@@ -79,7 +79,7 @@ export default class Marker_Services extends Component {
                 </Popover>
                 <Modal
                     visible={visible}
-                    title="Title"
+                    title={name}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     footer={[

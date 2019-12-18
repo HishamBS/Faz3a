@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { Container, Navbar, FormControl, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { login } from "../Component/functionAuth";
 import NavBarComp from './main/NavBarComp'
@@ -55,7 +54,6 @@ export default class Login extends Component {
         <br />
         <br />
 
-        <Container>
           <Formik
             initialValues={{
               email: "",
@@ -116,7 +114,6 @@ export default class Login extends Component {
             )}
           />
           <Link to="/password">Forget your password ?</Link>
-        </Container>
       </div>
     );
   }
