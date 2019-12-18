@@ -24,6 +24,7 @@ server.use(express.urlencoded({ extended: false }));
 //Routes
 server.use("/api/v1/users", require("./routes/users.routes"));
 server.use("/api/v1/items", require("./routes/items.routes"));
+server.use("/api/v1/users/chats", require("./routes/messages.routes"));
 server.use("/admin", require("./routes/admin.routes"));
 
 server.listen(PORT, () => {
