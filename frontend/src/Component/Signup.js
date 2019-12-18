@@ -41,8 +41,6 @@ export default class Signup extends Component {
     console.log(this.state);
     return (
       <div>
-        <NavBarComp />
-        {/* {console.log(this.getLatLong())} */}
         <br />
         <br />
         <Formik

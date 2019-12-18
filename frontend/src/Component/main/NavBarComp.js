@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "../../CSS/nav.css";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
-import { Icon, Layout, Menu, Dropdown, message, Button } from "antd";
+import { Icon, Layout, Menu, Dropdown, message } from "antd";
+import { Navbar, Nav, NavDropdown, Row, Button, Col } from 'react-bootstrap';
 
 const { Header, Content, Footer } = Layout;
 
@@ -12,10 +13,6 @@ export default class NavBarComp extends Component {
     console.log("click left button", e);
   };
 
-  // handleMenuClick = (e) => {
-  //     message.info('Click on menu item.');
-  //     console.log('click', e);
-  // }
   handleClick = e => {
     localStorage.removeItem("usertoken");
     localStorage.removeItem("user_id");
@@ -25,113 +22,42 @@ export default class NavBarComp extends Component {
     return (
       <div>
         {!localStorage.usertoken ? (
-          <Header class="nav">
-            <div class="nav">
-              <input type="checkbox" id="nav-check" />
-              <div className="nav-header">
-                <div class="nav-title"></div>
-              </div>
-              <div className="nav-btn">
-                <label for="nav-check">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </label>
-              </div>
-              <div className="nav-links">
-                <Link as={Link} to="/">
-                  Home
-                </Link>
-                <Link as={Link} to="/services">
-                  Services
-                </Link>
-                <Link as={Link} to="/points">
-                  Points
-                </Link>
-                <Link as={Link} to="/about">
-                  About
-                </Link>
-                <Link as={Link} to="/contact">
-                  Contact
-                </Link>
-              </div>
-              <div class="nav-links">
-                <Link as={Link} to="/signup">
-                  SignUp
-                </Link>
-                <Link as={Link} to="/login">
-                  Login
-                </Link>
-              </div>
-            </div>
-          </Header>
+          <Navbar collapseOnSelect expand="lg" variant="light">
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link as={Link} to="/">Home</Nav.Link>
+                <Nav.Link as={Link} to="/services">Services</Nav.Link>
+                <Nav.Link as={Link} to="/about">About</Nav.Link>
+                <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+              </Nav>
+              <Nav>
+                <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                <Nav.Link as={Link} to="/signup">SignUp</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
         ) : (
-          <Header class="nav">
-            <div class="nav">
-              <input type="checkbox" id="nav-check" />
-              <div className="nav-header">
-                <div class="nav-title"></div>
-              </div>
-              <div className="nav-btn">
-                <label for="nav-check">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </label>
-              </div>
-              <div className="nav-links">
-                <Link as={Link} to="/">
-                  Home
-                </Link>
-                <Link as={Link} to="/services">
-                  Services
-                </Link>
-                <Link as={Link} to="/points">
-                  Points
-                </Link>
-                <Link as={Link} to="/about">
-                  About
-                </Link>
-                <Link as={Link} to="/contact">
-                  Contact
-                </Link>
-              </div>
-              <div class="nav-links">
-                <Dropdown.Button
-                  overlay={
-                    <Menu onClick={this.handleMenuClick}>
-                      {/* <Menu.Item key="1" as={Link} to='/profile'>
-                        <Icon type="user" />
-                        Profile
-                      </Menu.Item> */}
-                      <Menu.Item key="2">
-                      <Link to='/profile'>
-                        <Icon type="user" />
-                        Profile
-                      </Link>
-                      </Menu.Item>
-                      <Menu.Item key="2">
-                        <Icon type="user" />
-                        Add Items
-                      </Menu.Item>
-                      <Menu.Item key="2">
-                        <Icon type="user" />
-                        Chat
-                      </Menu.Item>
-                      <Button onClick={this.handleClick} key="3">
-                        <Icon type="user" />
-                        LogOut
-                      </Button>
-                    </Menu>
-                  }
-                  icon={<Icon type="user" />}
-                >
-                  User
-                </Dropdown.Button>
-              </div>
-            </div>
-          </Header>
-        )}
+            <Navbar collapseOnSelect expand="lg" variant="light">
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto">
+                  <Nav.Link as={Link} to="/">Home</Nav.Link>
+                  <Nav.Link as={Link} to="/services">Services</Nav.Link>
+                  <Nav.Link as={Link} to="/about">About</Nav.Link>
+                  <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+
+                </Nav>
+                <Nav>
+                  <NavDropdown title=" User Account " id="collasible-nav-dropdown">
+                    <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item as={Button} onClick={this.handleClick}>LogOut</NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+          )}
       </div>
     );
   }

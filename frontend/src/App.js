@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import './App.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
+import { Icon } from 'antd';
+
 //component
 import NavBarComp from './Component/main/NavBarComp'
 import Home from './Component/Home'
@@ -13,6 +16,14 @@ export class App extends Component {
   render() {
     return (
       <div className='App'>
+        <Navbar style={{backgroundColor: "rgb(252, 250, 251)"}}>
+          <Nav className="mr-auto">
+            <Navbar.Brand href="/">Faz3a</Navbar.Brand>
+          </Nav>
+          <Nav>
+            <Icon type="twitter" />
+          </Nav>
+        </Navbar>
         <BrowserRouter>
           <Switch>
             <Route exact path='/' component={Home} />

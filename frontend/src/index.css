@@ -8,7 +8,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   background-repeat: repeat-y;
-  background:linear-gradient(-90deg, rgb(208,199,197), rgb(236,235,237));
+  /* background:linear-gradient(-90deg, rgb(208,199,197), rgb(236,235,237)); */
 }
 
 code {
