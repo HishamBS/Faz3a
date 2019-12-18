@@ -53,7 +53,6 @@ export default class Home extends Component {
                     </Col>
                 </Row>
                 <br />
-                <FooterComp />
             </div>
         )
     }
