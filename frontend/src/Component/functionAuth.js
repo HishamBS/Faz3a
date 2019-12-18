@@ -1,5 +1,6 @@
 import axios from "axios";
 import decode from "jwt-decode";
+import swal from "sweetalert";
 
 export const register = newUser => {
   return axios
@@ -21,17 +22,30 @@ export const login = user => {
     })
     .catch(err => console.log(err));
 };
+
 export const checkAuth = async props => {
   var dateNow = new Date();
   if (!localStorage.usertoken) {
     props.history.push("/login");
+    swal({
+      title: "You Need To Login First",
+      icon: "warning",
+      button: "ok"
+    })
     console.log("offline");
   } else {
     const token = localStorage.getItem("usertoken");
     var decodedToken = await decode(token);
     var exp = decodedToken.exp;
     if (exp < dateNow.getTime() / 1000) {
-      props.history.push("/login");
+      swal({
+        title: "You Need To sign in",
+        icon: "warning",
+        button: "ok"
+      })
+      .then( () => {
+        this.props.history.push("/login");
+      })
     }
   }
 };

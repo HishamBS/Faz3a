@@ -61,9 +61,9 @@ export default class Map extends Component {
         })
         return (
             <div>
-                <hr />
                 <NavBarComp />
                 <hr />
+                <h3>Select The Provider From Map</h3>
                 <Content style={{ padding: "0 100px" }}>
                     <br />
                     <div style={{ height: "100vh", width: "100%" }}>

@@ -10,16 +10,12 @@ export default class Provided_items extends Component {
     }
     componentDidMount() {
         let user = localStorage.getItem('user_id')
-        console.log(user)
         axios
             .get(`/api/v1/items/${user}/provided`)
             .then(user => {
                 this.setState({ user: user.data })
-                console.log(this.state.user);
-
             })
             .catch(err => console.log(err));
-
     }
     render() {
         var items = this.state.user.map(e => {
@@ -30,7 +26,6 @@ export default class Provided_items extends Component {
                 disabled
             />
         })
-        console.log(this.state.user)
         return (
             <div>
                 <h6>The Provided Item</h6>

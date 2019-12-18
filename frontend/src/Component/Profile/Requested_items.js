@@ -10,13 +10,10 @@ export default class Requested_items extends Component {
 
     componentDidMount() {
         let user = localStorage.getItem('user_id')
-        console.log(user)
         axios
             .get(`/api/v1/items/${user}/requested`)
             .then(user => {
                 this.setState({ user: user.data })
-                console.log(this.state.user);
-
             })
             .catch(err => console.log(err));
 

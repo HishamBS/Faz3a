@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
 import { Avatar, Form, Icon, Input, Button } from 'antd';
+import {Spinner} from "react-bootstrap"
 import { checkAuth } from "../functionAuth";
 import axios from "axios";
 import Requested_items from './Requested_items'
 import Provided_items from './Provided_items'
+import Forgetpasswor from './forgetpass'
+import Add_items from './Add_items';
 
 export default class Profile extends Component {
     state = {
         userInfo: '',
-        password: ''
+        password: '',
+        disabled: true,
+        nickname: '',
+        loading: false
     }
     componentDidMount() {
+        this.setState({ loading: true });
+        setTimeout(() => {
+            this.setState({ loading: false});
+        }, 3500);
         const uid = localStorage.getItem("user_id");
         if (uid) {
             axios
@@ -34,11 +44,21 @@ export default class Profile extends Component {
             })
             .catch(err => console.log(err));
     }
+    openInput = () => {
+        this.setState({ disabled: false })
+    }
+
     render() {
         checkAuth(this.props);
         const { userInfo } = this.state
         return (
             <div >
+                {this.state.loading?
+                <div style={{marginTop: '10%'}}>
+                <Spinner animation="grow" />
+                </div>
+                :
+                <div>
                 <Avatar size={150} icon="user" />
                 <br />
                 <h3>
@@ -50,10 +70,9 @@ export default class Profile extends Component {
                         <Input
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder={userInfo.nickname}
-                            disabled
-                        />
+                            disabled={this.state.disabled} />
+
                         <Form.Item>
-                            <Button onClick={this.changePass}>Change</Button>
                         </Form.Item>
                     </Form.Item>
                     <Form.Item>
@@ -62,8 +81,7 @@ export default class Profile extends Component {
                             type="email"
                             placeholder={userInfo.email}
                             disabled
-                            width={640}
-                        />
+                            width={640} />
                     </Form.Item>
                     <Form.Item>
                         <Input
@@ -72,21 +90,21 @@ export default class Profile extends Component {
                             placeholder="**********"
                             disabled
                             width={640}
-                        />
+                        /><Forgetpasswor />
                         <Form.Item>
-                            <Button>Change</Button>
                         </Form.Item>
                     </Form.Item>
                     <hr /><br />
                     <Provided_items />
                     <br /><br />
-                    <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
-                        <Icon type="plus" /> Add Item</Button>
+                    <Add_items />
                     <hr /><br />
                     <Requested_items />
                     <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
                         <Icon type="minus" /> Return Item</Button>
                 </Form>
+                </div>
+                }
             </div>
         )
     }
