@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap');
 .App {
   text-align: center;
-  margin: 40px;
+  /* margin: 40px; */
 }
 .App-logo {
   height: 40vmin;
@@ -32,6 +32,11 @@
   padding: 100px;
 
 }
+.backgound{
+  height: 730px;
+  opacity: 0.8;
+  background-image: url('https://www.jakpost.travel/wimages/large/157-1578744_citizenship-applicants-must-shake-hands-says-danish-shake.jpg');
+}
 
 .standard > .Hed {
   font-family: 'Architects Daughter', cursive;
@@ -47,4 +52,10 @@
   font-family: 'Architects Daughter', cursive;
   margin: 0 auto;
   margin-left: 1000;
+}
+
+.profile_layout {
+  margin: 0 auto;
+  width: 20%;
+
 }

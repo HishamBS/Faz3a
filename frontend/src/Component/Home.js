@@ -16,19 +16,16 @@ export default class Home extends Component {
     render() {
         return (
             <div >
-                <hr />
+                <div className='backgound'>
                 <NavBarComp />
                 <hr />
                 <br />
-                <div className='Hed'>
                     <Cards />
                 </div>
-                <hr />
-                <h3>===== What In =====</h3>
-                <hr />
+                <br /><br />
                 <Row gutter={[8, 8]}>
                     <Col span={12} >
-                        <h3 class="nav" style={{display: 'flex' , textAlign: 'center',marginTop: '150px' }}>“No one has ever become poor by giving.”</h3>
+                        <h3 class="nav" style={{ display: 'flex', textAlign: 'center', marginTop: '150px' }}>“No one has ever become poor by giving.”</h3>
                         <h4>― Anne Frank</h4>
                     </Col>
                     <Col span={12} >
@@ -50,7 +47,7 @@ export default class Home extends Component {
                         </div>
                     </Col>
                     <Col span={12} >
-                        <h3 class="nav" style={{display: 'flex' , textAlign: 'center',marginTop: '150px' }}>“No one is useless in this world who lightens the burdens of another.”</h3>
+                        <h3 class="nav" style={{ display: 'flex', textAlign: 'center', marginTop: '150px' }}>“No one is useless in this world who lightens the burdens of another.”</h3>
                         <br />
                         <h4>― Charles Dickens</h4>
                     </Col>
