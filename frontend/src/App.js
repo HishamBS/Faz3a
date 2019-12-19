@@ -14,6 +14,8 @@ import FooterComp from './Component/main/FooterComp'
 import About from './Component/About'
 import Logo from './Image/logo.png'
 import Messaging from "./Component/Msg/Messaging";
+
+
 export class App extends Component {
   render() {
     return (
@@ -29,7 +31,6 @@ export class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/points' component={Home} />
             <Route path='/services' component={Map} />
             <Route path='/about' component={About} />
             <Route path='/signup' component={Signup} />

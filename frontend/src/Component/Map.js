@@ -72,7 +72,7 @@ export default class Map extends Component {
                                 key: process.env.REACT_APP_MAP_KEY
                             }}
                             defaultCenter={{ lat: 21.508411, lng: 39.173046 }}
-                            defaultZoom={15}
+                            defaultZoom={14}
                             options={this.getMapOptions}
                         >
                             {users_markers}
@@ -82,6 +82,7 @@ export default class Map extends Component {
                     <div>
                     </div>
                 </Content>
+                <br /><br /><br />
             </div>
         )
     }

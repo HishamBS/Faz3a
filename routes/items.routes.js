@@ -49,7 +49,7 @@ router.get("/:user_id/requested", async (req, res) => {
 });
 
 //add an item to the provided array
-router.put("/:user_id/provided", async (req, res) => {
+router.post("/:user_id/provided", async (req, res) => {
   User.findById(req.params.user_id).then(user => {
     let provided_item = new Item(req.body);
     user.provided_items.push(provided_item._id);

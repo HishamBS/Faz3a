@@ -7,7 +7,6 @@ export default class Requested_items extends Component {
     state = {
         user: []
     }
-
     componentDidMount() {
         let user = localStorage.getItem('user_id')
         axios
@@ -16,8 +15,8 @@ export default class Requested_items extends Component {
                 this.setState({ user: user.data })
             })
             .catch(err => console.log(err));
-
     }
+
     render() {
         var items = this.state.user.map(e => {
             return <Input

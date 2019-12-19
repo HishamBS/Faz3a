@@ -47,7 +47,9 @@ export default class Home extends Component {
                         </div>
                     </Col>
                     <Col span={12} >
-                        <h3 class="nav" style={{ display: 'flex', textAlign: 'center', marginTop: '150px' }}>“No one is useless in this world who lightens the burdens of another.”</h3>
+                        <h3 class="nav" style={{ display: 'flex', textAlign: 'center', marginTop: '150px' }}>
+                            “No one is useless in this world who lightens the burdens of another.”
+                        </h3>
                         <br />
                         <h4>― Charles Dickens</h4>
                     </Col>

@@ -19,7 +19,7 @@ const itemSchema = new Schema(
         "beauty",
         "others"
       ],
-      required: true
+      required: false
     },
     item_description: {
       type: String,
