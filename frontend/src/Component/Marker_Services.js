@@ -69,7 +69,7 @@ class Marker_Services extends Component {
               <p style={{ textAlign: "center" }}>{name}</p>
               <div>
                 <Button type="primary" onClick={this.showModal}>
-                  Show Item Provided
+                  Click To See What Im Providing
                 </Button>
               </div>
             </div>

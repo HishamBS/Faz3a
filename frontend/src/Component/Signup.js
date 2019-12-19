@@ -40,8 +40,10 @@ export default class Signup extends Component {
     this.setState({ data: data });
   }
 
-  render() {
-    console.log(this.state);
+   render() {
+      if (!this.state) {
+        return null;
+      }
     return (
       <div>
         <br />

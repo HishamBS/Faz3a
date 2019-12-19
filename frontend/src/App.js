@@ -3,9 +3,7 @@ import "./App.css";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import { Icon } from "antd";
-
 //component
-<<<<<<< HEAD
 import NavBarComp from './Component/main/NavBarComp'
 import Home from './Component/Home'
 import Login from './Component/Login'
@@ -15,16 +13,7 @@ import Map from './Component/Map'
 import FooterComp from './Component/main/FooterComp'
 import About from './Component/About'
 import Logo from './Image/logo.png'
-=======
-import NavBarComp from "./Component/main/NavBarComp";
-import Home from "./Component/Home";
-import Login from "./Component/Login";
-import Signup from "./Component/Signup";
-import Profile from "./Component/Profile/Profile";
 import Messaging from "./Component/Msg/Messaging";
-import Map from "./Component/Map";
->>>>>>> 094ed32d429e2ce15f4fd492f06afb1b30b14573
-
 export class App extends Component {
   render() {
     return (
@@ -39,7 +28,6 @@ export class App extends Component {
         </Navbar>
         <BrowserRouter>
           <Switch>
-<<<<<<< HEAD
             <Route exact path='/' component={Home} />
             <Route path='/points' component={Home} />
             <Route path='/services' component={Map} />
@@ -47,26 +35,13 @@ export class App extends Component {
             <Route path='/signup' component={Signup} />
             <Route path='/login' component={Login} />
             <Route path='/profile' component={Profile} />
+            <Route path="/messages" component={Messaging} />
           </Switch>
         </BrowserRouter>
         <FooterComp />
         <div class="footer">
         <p> &copy; Copyright 2019. All Rights Reserved </p>
-        
     </div>
-=======
-            <Route exact path="/" component={Home} />
-            <Route path="/points" component={Home} />
-            <Route path="/services" component={Map} />
-            <Route path="/about" component={Home} />
-            <Route path="/contact" component={Home} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
-            <Route path="/messages" component={Messaging} />
-            <Route path="/profile" component={Profile} />
-          </Switch>
-        </BrowserRouter>
->>>>>>> 094ed32d429e2ce15f4fd492f06afb1b30b14573
       </div>
     );
   }
