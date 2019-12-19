@@ -11,7 +11,7 @@ export default class Remove_items extends Component {
         loading: false,
         visible: false,
         item_name: '',
-        flag: false, 
+        flag: false,
         item_id: ''
     };
     showModal = () => {
@@ -36,32 +36,32 @@ export default class Remove_items extends Component {
             .then(res => {
                 console.log(res.data)
                 var all = res.data.map(s => {
-                    if (s.item_name == this.state.item_name) {
-                        this.setState({ flag: true, item_id: this.state._id})
+                    console.log(s);
+                    console.log(s._id);
+                    console.log(s.item_name === this.state.item_name);
+                    
+                    if (s.item_name != s.item_name) {
+                        this.setState({ flag: true, item_id: this.state._id })
                     }
                 })
-                if(this.state.flag){
-                    swal({
-                        title: "Item Found",
-                        icon: "success",
-                        showConfirmButton: false,
-                        timer: 2500
-                    }).then(
-                        axios
+                if (this.state.flag) {
+                    axios
                         .delete(`/${uid}/provided/${this.state.item_id}`)
-                        .then(
+                        .then((res)=>{
+                            console.log(res);
                             swal({
                                 title: "Delete Successfully ",
                                 icon: "success",
                                 showConfirmButton: false,
                                 timer: 2500
-                            })
+                            }).then(window.location.href = "/profile")
+                        }
                         )
                         .catch(err => console.log(err))
-                    )
-                }else{
+
+                } else {
                     swal({
-                        title: "Item Not Found",
+                        title: "Item Not Found or Typed Wrong",
                         icon: "warning",
                         showConfirmButton: false,
                         timer: 2500

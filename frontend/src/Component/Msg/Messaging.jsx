@@ -71,6 +71,8 @@ class ChatScreen extends React.Component {
         ele.user2._id == target.style.id || ele.user1._id == target.style.id
       );
     });
+    console.log( oneUser[0]);
+    
     this.setState({
       selectUser: oneUser[0],
       colorSelect: parseInt(target.style.i),
@@ -91,7 +93,6 @@ class ChatScreen extends React.Component {
         <NavBarComp />
                 <hr />
                 <br />
-      <Container style={{ margin: " 90px 300px" }}>
         <Row className="justify-content-md-center">
           <Container
             style={{ marginTop: 30, backgroundColor: "#fff", padding: "1em" }}
@@ -104,7 +105,7 @@ class ChatScreen extends React.Component {
             <Row className="justify-content-md-center">
               <Col lg="3">
                 <div style={{ maxHeight: "500px" }}>
-                  <ListGroup style={{ cursor: "pointer" }}>
+                  <ListGroup style={{ cursor: "pointer"  }}>
                     {this.state.users.map((u, index) => {
                       var bgColor =
                         index === this.state.colorSelect ? "#7187ee" : "";
@@ -125,7 +126,7 @@ class ChatScreen extends React.Component {
                         >
                           {u.name}
                           {this.state.provided_items.map(e=>{
-                              return<li>e.provided_items.item_name</li>
+                              return<li>{e.item_name}</li>
                           })}
                         </ListGroup.Item>
                       );
@@ -223,7 +224,7 @@ class ChatScreen extends React.Component {
             </Row>
           </Container>
         </Row>
-      </Container>
+        <br /><br /><br /><br />
       </div>
     );
   }

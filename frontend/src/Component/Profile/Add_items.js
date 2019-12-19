@@ -47,17 +47,18 @@ export default class Add_items extends Component {
         var body = {
             item_name: this.state.item_name,
             item_description: this.state.item_description,
-            belongs_to_user: uid
+            belongs_to_user: uid,
+            item_status: "available"
         }
         axios
-            .put(`/api/v1/items/${uid}/provided`, body)
+            .post(`/api/v1/items/${uid}/provided`, body)
             .then(res => {
                 swal({
                     title: "Added successfully",
                     icon: "success",
                     showConfirmButton: false,
                     timer: 2500
-                }).then(this.handleCancel)
+                }).then( () => window.location.href = "/profile")
             })
             .catch(err => console.log(err));
     };
