@@ -7,7 +7,7 @@ import Requested_items from './Requested_items'
 import Provided_items from './Provided_items'
 import Forgetpasswor from './forgetpass'
 import Add_items from './Add_items';
-import Return_items from './Return_items'
+import Return_item from './Return_item'
 import Remove_items from './Remove_items'
 export default class Profile extends Component {
     state = {
@@ -105,7 +105,7 @@ export default class Profile extends Component {
                     <hr /><br />
                     <Requested_items />
                     <br /><br />
-                    <Return_items />
+                    <Return_item />
                     <br /><br /><br /><br /><br />
                 </Form>
                 </div>

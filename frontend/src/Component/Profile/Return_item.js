@@ -5,13 +5,14 @@ import axios from "axios";
 import swal from "sweetalert";
 import { Icon } from "antd";
 
-export default class Remove_items extends Component {
+export default class Return_item extends Component {
   state = {
     loading: false,
     visible: false,
     item_name: "",
     flag: false,
-    item_id: ""
+    item_id: "",
+    owner_id: ""
   };
   showModal = () => {
     this.setState({
@@ -23,7 +24,10 @@ export default class Remove_items extends Component {
   };
   handleChange = event => {
     console.log(event.target.value);
-    this.setState({ item_name: event.target.value });
+    this.setState({
+      item_name: event.target.value,
+      item_id: this.state.item_name
+    });
   };
   handleSubmit = event => {
     const uid = localStorage.getItem("user_id");
@@ -31,7 +35,7 @@ export default class Remove_items extends Component {
     event.preventDefault();
     console.log("submittied");
     axios
-      .get(`/api/v1/items/${uid}/provided`)
+      .get(`/api/v1/items/${uid}/requested`)
       .then(res => {
         console.log(res.data);
         var all = res.data.map(s => {
@@ -40,16 +44,17 @@ export default class Remove_items extends Component {
           console.log(s.item_name === this.state.item_name);
 
           if (s.item_name === this.state.item_name) {
+            // this.setState({ownerId:})
             this.setState({ flag: true, item_id: s._id });
           }
         });
         if (this.state.flag) {
           axios
-            .delete(`/api/v1/items/${uid}/provided/${this.state.item_id}`)
+            .put(`/api/v1/items/return/${uid}/${this.state.item_id}`)
             .then(res => {
               console.log(res);
               swal({
-                title: "Delete Successfully ",
+                title: "Returned Successfully ",
                 icon: "success",
                 showConfirmButton: false,
                 timer: 2500
@@ -73,11 +78,11 @@ export default class Remove_items extends Component {
       <div>
         <Button type="primary" onClick={this.showModal}>
           <Icon type="minus" />
-          Remove Item
+          Return Item
         </Button>
         <Modal
           visible={visible}
-          title="Remove Item"
+          title="Return Item"
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           footer={[]}
@@ -86,7 +91,7 @@ export default class Remove_items extends Component {
             <Form.Group controlId="formBasicPassword">
               <Form.Control
                 type="text"
-                placeholder="Enter Item to remove"
+                placeholder="Enter Item to return"
                 value={this.state.item}
                 onChange={this.handleChange}
               />

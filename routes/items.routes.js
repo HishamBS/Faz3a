@@ -28,7 +28,10 @@ router.get("/", async (req, res) => {
 router.get("/:user_id/provided", async (req, res) => {
   try {
     let selectedUserProvided = await User.findById(req.params.user_id).populate(
-      "provided_items"
+      {
+        path: "provided_items",
+        populate: { path: "requested_by_user", select: "nickname" }
+      }
     );
     res.status(200).json(selectedUserProvided.provided_items);
   } catch (error) {
@@ -41,7 +44,11 @@ router.get("/:user_id/requested", async (req, res) => {
   try {
     let selectedUserRequested = await User.findById(
       req.params.user_id
-    ).populate("requested_items");
+    ).populate({
+      path: "requested_items",
+      populate: { path: "belongs_to_user", select: "nickname" }
+    });
+
     res.status(200).json(selectedUserRequested.requested_items);
   } catch (error) {
     res.status(400).json({ msg: error });
@@ -99,35 +106,35 @@ router.put("/request/:requester_id/:provided_item_id/", (req, res) => {
     .then(requester => {
       requester.requested_items.push(req.params.provided_item_id);
       requester.save();
-    Item.findById(req.params.provided_item_id)
-    .then(item =>{
-        item.item_status = "unavailable"
-        item.requested_by_user.push(req.params.requester_id)
-        item.save()
-        res.status(200).json({ msg: "item successfully requested", item: item });
-    })
+      Item.findById(req.params.provided_item_id).then(item => {
+        item.item_status = "unavailable";
+        item.requested_by_user.push(req.params.requester_id);
+        item.save();
+        res
+          .status(200)
+          .json({ msg: "item successfully requested", item: item });
+      });
     })
     .catch(err => {
-        res.status(400).json({ msg: "item not found", err: err });
+      res.status(400).json({ msg: "item not found", err: err });
     });
 });
 
 //return a requested items to the original owner
 router.put("/return/:requester_id/:provided_item_id/", (req, res) => {
-    User.findById(req.params.requester_id)
-      .then(requester => {
-        requester.requested_items.pull({_id:req.params.provided_item_id});
-        requester.save();
-      Item.findById(req.params.provided_item_id)
-      .then(item =>{
-          item.item_status = "available"
-          item.requested_by_user.pull({_id:req.params.requester_id})
-          item.save()
-          res.status(200).json({ msg: "item successfully returned", item: item });
-      })
-      })
-      .catch(err => {
-          res.status(400).json({ msg: "item not found", err: err });
+  User.findById(req.params.requester_id)
+    .then(requester => {
+      requester.requested_items.pull({ _id: req.params.provided_item_id });
+      requester.save();
+      Item.findById(req.params.provided_item_id).then(item => {
+        item.item_status = "available";
+        item.requested_by_user.pull({ _id: req.params.requester_id });
+        item.save();
+        res.status(200).json({ msg: "item successfully returned", item: item });
       });
-  });
+    })
+    .catch(err => {
+      res.status(400).json({ msg: "item not found", err: err });
+    });
+});
 module.exports = router;
