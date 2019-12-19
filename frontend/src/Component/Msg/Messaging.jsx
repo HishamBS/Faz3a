@@ -1,6 +1,16 @@
 import "./main.css";
 import React from "react";
-import { Form, ListGroup, Container, Button, Row, Col } from "react-bootstrap";
+import {
+  Form,
+  ListGroup,
+  Container,
+  Button,
+  Row,
+  Col,
+  Dropdown,
+  ButtonGroup,
+  DropdownButton
+} from "react-bootstrap";
 import axios from "axios";
 import { checkAuth } from "../functionAuth";
 import NavBarComp from '../main/NavBarComp'
@@ -14,7 +24,9 @@ class ChatScreen extends React.Component {
       users: [],
       selectUser: null,
       colorSelect: 0,
-      provided_items: []
+      provided_items: [],
+      btnTitle: "click to choose an item",
+      selectedProvidedItem: ""
     };
   }
 
@@ -60,12 +72,22 @@ class ChatScreen extends React.Component {
     );
   }
 
-  selectUserHadelr = ({ target }) => {
+  handleRequest = () => {
     axios
-      .get(`/api/v1/items/${target.style.id}/provided/`)
-      .then(res => {
-        this.setState({provided_items:res.data})
+      .put(
+        `api/v1/items/request/${localStorage.user_id}/${this.state.selectedProvidedItem}/`
+      )
+      .then(result => {
+          window.location.href = '/profile'
+          
       });
+  };
+  selectUserHadelr = ({ target }) => {
+    axios.get(`/api/v1/items/${target.style.id}/provided/`).then(res => {
+      this.setState({ provided_items: res.data });
+      console.log(this.state.provided_items);
+    });
+
     var oneUser = this.state.arrayOfChats.filter(ele => {
       return (
         ele.user2._id == target.style.id || ele.user1._id == target.style.id
@@ -125,9 +147,6 @@ class ChatScreen extends React.Component {
                           onClick={this.selectUserHadelr}
                         >
                           {u.name}
-                          {this.state.provided_items.map(e=>{
-                              return<li>{e.item_name}</li>
-                          })}
                         </ListGroup.Item>
                       );
                     })}
@@ -148,6 +167,51 @@ class ChatScreen extends React.Component {
                               : this.state.selectUser.user2.nickname}{" "}
                           </>
                         )}
+                        <Container>
+                          {this.state.selectUser !== null &&
+                            this.state.selectUser.user2._id !=
+                              localStorage.user_id && (
+                              <div>
+                                <div>
+                                  <h6>
+                                    Please select from the menu the item you
+                                    want
+                                  </h6>{" "}
+                                  <h6>
+                                    only choose when the provider gives the 👍{" "}
+                                  </h6>
+                                </div>
+                                <DropdownButton
+                                  id="dropdown-basic-button"
+                                  title={this.state.btnTitle}
+                                  onClick={e => {
+                                    this.setState({
+                                      selectedProvidedItem: e.target.name
+                                    });
+                                    this.setState({ btnTitle: e.target.text });
+                                  }}
+                                >
+                                  
+                                  {this.state.provided_items.map(e => {
+                                    return (
+                                        e.item_status == "available"? 
+                                      <Dropdown.Item
+                                        name={e._id}
+                                      >
+                                        {e.item_name}🟢
+                                      </Dropdown.Item>
+                                        :<h6 style={{textAlign:"center"}}>{e.item_name}🔴</h6>
+                                    )
+                                  })}
+                                </DropdownButton>
+                                {this.state.selectedProvidedItem && (
+                                  <Button onClick={this.handleRequest}>
+                                    Send Request
+                                  </Button>
+                                )}
+                              </div>
+                            )}
+                        </Container>
                       </h3>
                     </div>
                   </Col>

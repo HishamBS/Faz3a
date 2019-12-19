@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
-
+import { Icon } from "antd";
 //component
 import NavBarComp from './Component/main/NavBarComp'
 import Home from './Component/Home'
@@ -42,7 +42,6 @@ export class App extends Component {
         <FooterComp />
         <div class="footer">
         <p> &copy; Copyright 2019. All Rights Reserved </p>
-        
     </div>
       </div>
     );
