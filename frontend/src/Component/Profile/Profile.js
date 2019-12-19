@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Avatar, Form, Icon, Input, Button } from 'antd';
-import {Spinner} from "react-bootstrap"
+import {Spinner, Col, Row} from "react-bootstrap"
 import { checkAuth } from "../functionAuth";
 import axios from "axios";
 import Requested_items from './Requested_items'
 import Provided_items from './Provided_items'
 import Forgetpasswor from './forgetpass'
 import Add_items from './Add_items';
-
+import Return_items from './Return_items'
+import Remove_items from './Remove_items'
 export default class Profile extends Component {
     state = {
         userInfo: '',
@@ -97,11 +98,15 @@ export default class Profile extends Component {
                     <hr /><br />
                     <Provided_items />
                     <br /><br />
-                    <Add_items />
+                    <Row className="justify-content-md-center">
+                        <Col md={{ span: 5}}><Add_items /></Col>
+                        <Col><Remove_items /></Col>
+                    </Row>
                     <hr /><br />
                     <Requested_items />
-                    <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
-                        <Icon type="minus" /> Return Item</Button>
+                    <br /><br />
+                    <Return_items />
+                    <br /><br /><br /><br /><br />
                 </Form>
                 </div>
                 }

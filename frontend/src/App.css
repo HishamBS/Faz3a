@@ -33,9 +33,12 @@
 
 }
 .backgound{
-  height: 730px;
   opacity: 0.8;
   background-image: url('https://www.jakpost.travel/wimages/large/157-1578744_citizenship-applicants-must-shake-hands-says-danish-shake.jpg');
+    height: 800px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .standard > .Hed {

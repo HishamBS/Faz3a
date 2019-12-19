@@ -3,8 +3,7 @@ import React from "react";
 import { Form, ListGroup, Container, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { checkAuth } from "../functionAuth";
-//
-
+import NavBarComp from '../main/NavBarComp'
 class ChatScreen extends React.Component {
   lastMessage = null;
 
@@ -25,8 +24,6 @@ class ChatScreen extends React.Component {
 
   componentDidMount() {
     checkAuth(this.props);
-
-    
 
     axios
       .get(`/api/v1/users/chats/${localStorage.getItem(`user_id`)}`)
@@ -90,6 +87,10 @@ class ChatScreen extends React.Component {
     console.log(this.state.selectUser);
 
     return (
+      <div>
+        <NavBarComp />
+                <hr />
+                <br />
       <Container style={{ margin: " 90px 300px" }}>
         <Row className="justify-content-md-center">
           <Container
@@ -223,6 +224,7 @@ class ChatScreen extends React.Component {
           </Container>
         </Row>
       </Container>
+      </div>
     );
   }
 }
