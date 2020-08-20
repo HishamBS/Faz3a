@@ -23,7 +23,7 @@
     "admin-bro-mongoose": "^0.3.0",
     "admin-bro-theme-dark": "^1.0.0",
     "argon2": "^0.25.1",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
