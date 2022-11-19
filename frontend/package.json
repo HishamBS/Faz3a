@@ -25,8 +25,8 @@
     "react-fade-in": "^0.1.7",
     "react-loading": "^2.0.3",
     "react-lottie": "^1.2.3",
-    "react-realtime-chat": "0.0.8",
-    "react-scripts": "3.3.0",
+    "react-realtime-chat": "0.1.0",
+    "react-scripts": "5.0.1",
     "sweetalert": "^2.1.2",
     "tsutils": "^3.17.1",
     "yup": "^0.27.0"
